@@ -9,6 +9,7 @@ spec:
       volumeMounts:
         - name: cache
           mountPath: /root/local/lib/node_modules
+          subPath: node_modules
       command:
         - sleep
       args:
@@ -50,7 +51,7 @@ spec:
             } 
             container('docker')   {
                 stage('Containerization') {
-                    docker_image = docker.build("sonatype-nexus-nexus-repository-manager-docker-5000.nexus:5000/java-netty-app:v1")
+                    docker_image = docker.build("sonatype-nexus-nexus-repository-manager-docker-5000.nexus:5000/nodejs-app:v1")
                     withDockerRegistry(url: 'http://sonatype-nexus-nexus-repository-manager-docker-5000.nexus:5000', credentialsId: 'docker-registry-credential') {
                           docker_image.push()
                 }  
